@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types";
 
@@ -16,8 +18,40 @@ function initials(title: string) {
     .join("");
 }
 
-/** Decorative cover generated from project data (used until screenshots exist). */
+/** Project cover: the real screenshot when `image` is set, otherwise a generated preview. */
 export function ProjectPreview({ project, className, large }: ProjectPreviewProps) {
+  if (project.image) {
+    const host = project.links.live?.href.replace(/^https?:\/\//, "").replace(/\/$/, "");
+    return (
+      <div className={cn("preview-surface relative overflow-hidden", className)}>
+        <div className="grid-lines absolute inset-0" aria-hidden />
+        <div className="absolute inset-x-[6%] top-[10%] bottom-0 overflow-hidden rounded-t-xl border border-b-0 border-border bg-card shadow-2xl transition-transform duration-500 ease-out group-hover:-translate-y-1.5">
+          <div className="flex items-center gap-1.5 border-b border-border px-3 py-2">
+            <span className="size-2 rounded-full bg-rose-400/70" />
+            <span className="size-2 rounded-full bg-amber-400/70" />
+            <span className="size-2 rounded-full bg-emerald-400/70" />
+            {host ? (
+              <span className="ml-2 truncate rounded-md bg-foreground/[0.06] px-2 py-0.5 text-[10px] text-muted-foreground">
+                {host}
+              </span>
+            ) : null}
+          </div>
+          <div className="relative h-full">
+            <Image
+              src={project.image}
+              alt={`${project.title} screenshot`}
+              fill
+              unoptimized
+              loading="eager"
+              sizes="(min-width: 1024px) 34rem, 92vw"
+              className="object-cover object-top"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn("preview-surface relative overflow-hidden", className)}

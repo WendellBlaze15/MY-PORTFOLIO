@@ -17,11 +17,27 @@ export function FeaturedProject({ project }: FeaturedProjectProps) {
     <Reveal>
       <article className="glass-card card-hover group overflow-hidden">
         <div className="grid lg:grid-cols-2">
-          <ProjectPreview
-            project={project}
-            large
-            className="min-h-[260px] border-b border-border sm:min-h-[320px] lg:min-h-[420px] lg:border-r lg:border-b-0"
-          />
+          {live ? (
+            <a
+              href={live.href}
+              target={external ? "_blank" : undefined}
+              rel={external ? "noopener noreferrer" : undefined}
+              className="focus-ring block border-b border-border lg:border-r lg:border-b-0"
+              aria-label={`Open ${project.title}`}
+            >
+              <ProjectPreview
+                project={project}
+                large
+                className="h-full min-h-[260px] sm:min-h-[320px] lg:min-h-[420px]"
+              />
+            </a>
+          ) : (
+            <ProjectPreview
+              project={project}
+              large
+              className="min-h-[260px] border-b border-border sm:min-h-[320px] lg:min-h-[420px] lg:border-r lg:border-b-0"
+            />
+          )}
 
           <div className="flex flex-col gap-5 p-6 sm:p-8">
             <div className="space-y-3">
@@ -34,7 +50,18 @@ export function FeaturedProject({ project }: FeaturedProjectProps) {
                 </span>
               </div>
               <h3 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                {project.title}
+                {live ? (
+                  <a
+                    href={live.href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    className="focus-ring rounded-sm transition-colors hover:text-primary"
+                  >
+                    {project.title}
+                  </a>
+                ) : (
+                  project.title
+                )}
               </h3>
               <p className="text-muted-foreground">{project.description}</p>
             </div>

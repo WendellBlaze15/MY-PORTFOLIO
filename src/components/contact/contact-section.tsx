@@ -2,6 +2,7 @@ import { ArrowUpRight, Mail, MapPin, Send } from "lucide-react";
 
 import { Reveal } from "@/components/animations/reveal";
 import { ContactForm } from "@/components/contact/contact-form";
+import { LocationMap } from "@/components/contact/location-map";
 import { CopyEmailButton } from "@/components/shared/copy-email-button";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/social-icons";
@@ -107,6 +108,12 @@ export function ContactSection() {
             <div className="relative">
               <ContactForm />
             </div>
+
+            {location ? (
+              <div className="relative lg:col-span-2">
+                <LocationMap address={location} query={siteConfig.mapQuery} />
+              </div>
+            ) : null}
           </div>
         </Reveal>
       </div>

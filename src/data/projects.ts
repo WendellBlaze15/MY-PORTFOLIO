@@ -17,7 +17,10 @@ export const projects: Project[] = [
       "Admin dashboard for employment services",
       "Responsive interface for applicants and staff",
     ],
-    links: {},
+    image: "/projects/jobbridge.webp",
+    links: {
+      live: { label: "View Live Site", href: "https://jobbridge-lac.vercel.app/" },
+    },
     featured: true,
   },
   {

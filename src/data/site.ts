@@ -3,7 +3,7 @@ import { skillCategories } from "@/data/skills";
 import type { NavItem, SocialLink, StatItem } from "@/types";
 
 /**
- * Confirmed personal information only. Optional fields (location, resume) stay
+ * Confirmed personal information only. Optional fields (e.g. resume) stay
  * empty until real values are available — the UI hides anything that is not set.
  */
 export const siteConfig = {
@@ -17,7 +17,9 @@ export const siteConfig = {
   /** Public contact email. Leave empty to hide email actions. */
   email: "wendellramos400@gmail.com",
   /** City / region. Leave empty to hide. */
-  location: "",
+  location: "571 Purok 4, Pinagbayanan, Pila, Laguna",
+  /** Google Maps lookup for the contact map (house number omitted so the pin centers correctly). */
+  mapQuery: "Purok 4, Brgy. Pinagbayanan, Pila, Laguna",
   availability: "Available for opportunities",
   resumePath: "/resume/wendell-ramos-resume.pdf",
   /** Set to true after adding the PDF at `resumePath`. */

@@ -34,6 +34,8 @@ export type Project = {
   category: string;
   technologies: string[];
   features: string[];
+  /** Screenshot shown as the project cover (falls back to a generated preview). */
+  image?: string;
   links: {
     live?: ProjectLink;
   };
