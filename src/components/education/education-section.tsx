@@ -1,12 +1,11 @@
-import { GraduationCap } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 import { Reveal } from "@/components/animations/reveal";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { educationItems } from "@/data/education";
+import { cn } from "@/lib/utils";
 
 export function EducationSection() {
-  const [current, ...earlier] = educationItems;
-
   return (
     <section id="education" className="section-padding">
       <div className="container-narrow">
@@ -18,59 +17,112 @@ export function EducationSection() {
           />
         </Reveal>
 
-        {current ? (
-          <Reveal>
-            <article className="glass-card card-hover relative flex flex-col gap-5 overflow-hidden p-6 sm:flex-row sm:items-center sm:p-8">
-              <div
-                className="absolute -top-16 -right-16 size-48 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--primary)_22%,transparent),transparent_70%)]"
-                aria-hidden
-              />
-              <div className="relative flex size-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-sky-500 text-white shadow-[0_10px_30px_-10px_var(--primary)]">
-                <GraduationCap className="size-8" />
-              </div>
-              <div className="relative space-y-2">
-                {current.period ? (
-                  <p className="inline-flex rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary dark:text-violet-200">
-                    {current.period}
-                  </p>
-                ) : null}
-                <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">
-                  {current.degree}
-                </h3>
-                <p className="text-muted-foreground">
-                  {current.school}
-                  {current.campus ? ` — ${current.campus}` : ""}
-                </p>
-                {current.description ? (
-                  <p className="text-sm text-muted-foreground">
-                    {current.description}
-                  </p>
-                ) : null}
-              </div>
-            </article>
-          </Reveal>
-        ) : null}
+        <ol className="relative">
+          {/* Timeline rail: centered in the 2rem (mobile) / 3rem (md+) dot column */}
+          <span
+            className="absolute top-2 bottom-2 left-4 w-px -translate-x-1/2 bg-gradient-to-b from-primary via-primary/40 to-border md:left-[11.5rem]"
+            aria-hidden
+          />
 
-        {earlier.length ? (
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {earlier.map((item, index) => (
-              <Reveal key={item.id} delay={0.05 * index} className="h-full">
-                <article className="glass-card card-hover h-full space-y-1.5 p-5">
-                  <p className="text-xs font-semibold tracking-wider text-primary uppercase">
-                    {item.degree}
-                  </p>
-                  <h3 className="font-semibold tracking-tight">{item.school}</h3>
-                  {item.campus ? (
-                    <p className="text-sm text-muted-foreground">{item.campus}</p>
-                  ) : null}
-                  {item.period ? (
-                    <p className="text-xs text-muted-foreground">{item.period}</p>
-                  ) : null}
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        ) : null}
+          {educationItems.map((item, index) => {
+            const current = index === 0;
+            const showDegree = item.degree !== item.level;
+
+            return (
+              <li key={item.id} className="relative pb-5 last:pb-0">
+                <Reveal delay={0.05 * index}>
+                  <div className="grid grid-cols-[2rem_1fr] md:grid-cols-[10rem_3rem_1fr]">
+                    {/* Level + period (desktop) */}
+                    <div className="hidden pt-5 pr-2 text-right md:block">
+                      <p
+                        className={cn(
+                          "text-sm font-semibold",
+                          current ? "text-primary" : "text-foreground/80"
+                        )}
+                      >
+                        {item.level}
+                      </p>
+                      {item.period ? (
+                        <p className="mt-0.5 text-xs text-muted-foreground">{item.period}</p>
+                      ) : null}
+                    </div>
+
+                    {/* Dot */}
+                    <div className="relative flex justify-center pt-6">
+                      {current ? (
+                        <span className="relative flex size-3.5">
+                          <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-40" />
+                          <span className="relative inline-flex size-3.5 rounded-full bg-primary ring-4 ring-primary/20" />
+                        </span>
+                      ) : (
+                        <span className="size-3 rounded-full border-2 border-primary/60 bg-background" />
+                      )}
+                    </div>
+
+                    {/* Card */}
+                    <article
+                      className={cn(
+                        "glass-card card-hover relative overflow-hidden p-5 sm:p-6",
+                        current && "border-primary/35"
+                      )}
+                    >
+                      {current ? (
+                        <div
+                          className="pointer-events-none absolute -top-20 -right-20 size-56 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--primary)_18%,transparent),transparent_70%)]"
+                          aria-hidden
+                        />
+                      ) : null}
+
+                      <div className="relative">
+                        {/* Level + period (mobile) */}
+                        <div className="mb-2 flex flex-wrap items-center gap-2 md:hidden">
+                          <span
+                            className={cn(
+                              "text-xs font-semibold tracking-wider uppercase",
+                              current ? "text-primary" : "text-foreground/70"
+                            )}
+                          >
+                            {item.level}
+                          </span>
+                          {item.period ? (
+                            <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary dark:text-violet-200">
+                              {item.period}
+                            </span>
+                          ) : null}
+                        </div>
+
+                        <h3
+                          className={cn(
+                            "font-semibold tracking-tight",
+                            current ? "text-lg sm:text-xl" : "text-base sm:text-lg"
+                          )}
+                        >
+                          {item.school}
+                        </h3>
+                        {showDegree ? (
+                          <p className="mt-1 text-sm font-medium text-foreground/80">
+                            {item.degree}
+                          </p>
+                        ) : null}
+                        {item.campus ? (
+                          <p className="mt-1.5 flex items-center gap-1.5 text-sm text-muted-foreground">
+                            <MapPin className="size-3.5 shrink-0" />
+                            {item.campus}
+                          </p>
+                        ) : null}
+                        {item.description ? (
+                          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                            {item.description}
+                          </p>
+                        ) : null}
+                      </div>
+                    </article>
+                  </div>
+                </Reveal>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );

@@ -53,6 +53,8 @@ export type ExperienceItem = {
 
 export type EducationItem = {
   id: string;
+  /** Short stage label, e.g. "College", "Elementary" */
+  level: string;
   degree: string;
   school: string;
   campus?: string;

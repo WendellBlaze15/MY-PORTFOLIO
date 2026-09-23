@@ -4,6 +4,7 @@ import type { EducationItem } from "@/types";
 export const educationItems: EducationItem[] = [
   {
     id: "bsit",
+    level: "College",
     degree: "Bachelor of Science in Information Technology",
     school: "Laguna State Polytechnic University",
     campus: "Santa Cruz Campus",
@@ -13,16 +14,21 @@ export const educationItems: EducationItem[] = [
   },
   {
     id: "senior-high",
+    level: "Senior High School",
     degree: "Senior High School",
     school: "Pila Senior High School",
+    campus: "Pila, Laguna",
   },
   {
     id: "junior-high",
+    level: "High School",
     degree: "High School",
     school: "Linga National High School",
+    campus: "Pila, Laguna",
   },
   {
     id: "elementary",
+    level: "Elementary",
     degree: "Elementary",
     school: "Pinagbayanan",
     campus: "Pila, Laguna",
