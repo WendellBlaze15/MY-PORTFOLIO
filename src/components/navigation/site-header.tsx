@@ -58,24 +58,9 @@ export function SiteHeader() {
           : "border-b border-transparent bg-transparent"
       )}
     >
-      <div className="container-narrow flex h-16 items-center justify-between gap-4">
-        <Link
-          href="#home"
-          className="focus-ring group flex items-center gap-2.5 rounded-md"
-          onClick={() => setOpen(false)}
-          aria-label={`${siteConfig.name} — home`}
-        >
-          <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-sky-500 text-sm font-bold text-white shadow-[0_6px_20px_-6px_var(--primary)] transition-transform duration-300 group-hover:rotate-6">
-            {siteConfig.shortName}
-          </span>
-          <span className="hidden text-sm font-semibold tracking-tight sm:inline">
-            {siteConfig.name.split(" ")[0]}
-            <span className="text-primary">.</span>
-          </span>
-        </Link>
-
+      <div className="container-narrow flex h-16 items-center justify-end gap-4 lg:justify-between">
         <nav
-          className="hidden items-center gap-0.5 rounded-full border border-border bg-foreground/[0.03] p-1 lg:flex"
+          className="hidden items-center gap-0.5 rounded-full border border-border bg-foreground/[0.03] p-1 lg:mx-auto lg:flex"
           aria-label="Primary"
         >
           {navItems.map((item) => {

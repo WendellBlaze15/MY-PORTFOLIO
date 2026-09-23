@@ -86,7 +86,7 @@ export function ContactSection() {
                   <span className="min-w-0 flex-1">
                     <span className="block font-semibold">{link.label}</span>
                     <span className="block truncate text-sm text-muted-foreground">
-                      {link.href.replace(/^https?:\/\//, "")}
+                      {link.display ?? link.label}
                     </span>
                   </span>
                   <ArrowUpRight className="size-5 shrink-0 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />

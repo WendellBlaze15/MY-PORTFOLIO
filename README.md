@@ -1,4 +1,4 @@
-# Wendell Derama Ramos — Portfolio
+# Wendell De Rama Ramos — Portfolio
 
 Professional personal portfolio built with Next.js (App Router), TypeScript, Tailwind CSS, shadcn/ui, Lucide, and Motion.
 

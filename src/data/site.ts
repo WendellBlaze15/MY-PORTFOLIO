@@ -3,20 +3,19 @@ import { skillCategories } from "@/data/skills";
 import type { NavItem, SocialLink, StatItem } from "@/types";
 
 /**
- * Confirmed personal information only. Optional fields (email, location,
- * LinkedIn, resume) stay empty until real values are available — the UI hides
- * anything that is not set.
+ * Confirmed personal information only. Optional fields (location, resume) stay
+ * empty until real values are available — the UI hides anything that is not set.
  */
 export const siteConfig = {
-  name: "Wendell Derama Ramos",
+  name: "Wendell De Rama Ramos",
   shortName: "WR",
   title: "Information Technology Student & Aspiring Web Developer",
   tagline:
     "I build modern, useful, and polished digital experiences with a focus on clean UI and thoughtful UX.",
   description:
-    "Portfolio of Wendell Derama Ramos — Information Technology student and aspiring web developer specializing in modern web applications, UI/UX, and thoughtful digital experiences.",
+    "Portfolio of Wendell De Rama Ramos — Information Technology student and aspiring web developer specializing in modern web applications, UI/UX, and thoughtful digital experiences.",
   /** Public contact email. Leave empty to hide email actions. */
-  email: "",
+  email: "wendellramos400@gmail.com",
   /** City / region. Leave empty to hide. */
   location: "",
   availability: "Available for opportunities",
@@ -41,14 +40,21 @@ export const navItems: NavItem[] = [
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
   { label: "Education", href: "#education" },
+  { label: "Certifications", href: "#certifications" },
   { label: "Contact", href: "#contact" },
 ];
 
-/** Add LinkedIn here (e.g. `{ label: "LinkedIn", href: "https://..." }`) once confirmed. */
+/** `display` is the text shown on the page (never the raw URL). */
 export const socialLinks: SocialLink[] = [
   {
     label: "GitHub",
     href: "https://github.com/WendellBlaze15",
+    display: "@WendellBlaze15",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/wendell-de-rama-ramos-b60920427/",
+    display: "Wendell De Rama Ramos",
   },
 ];
 

@@ -6,6 +6,8 @@ export type NavItem = {
 export type SocialLink = {
   label: string;
   href: string;
+  /** Text shown on the page instead of the URL */
+  display?: string;
 };
 
 export type StatItem = {
@@ -58,7 +60,9 @@ export type CertificationItem = {
   id: string;
   title: string;
   issuer: string;
+  issuerKey: "aws" | "cisco";
   date: string;
+  skills?: string[];
   credentialUrl?: string;
   image?: string;
 };

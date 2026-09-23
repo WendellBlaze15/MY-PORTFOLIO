@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
-    "Wendell Derama Ramos",
+    "Wendell De Rama Ramos",
     "Wendell Ramos",
     "web developer",
     "portfolio",
