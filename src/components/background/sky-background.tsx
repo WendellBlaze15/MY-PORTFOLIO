@@ -85,6 +85,41 @@ function Aircraft({ scale }: { scale: number }) {
   );
 }
 
+/** Small flying saucer with an alien pilot under the glass dome. */
+function Ufo() {
+  return (
+    <svg viewBox="0 0 64 44" width={84} height={58} aria-hidden>
+      <defs>
+        <linearGradient id="ufo-body" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" style={{ stopColor: "var(--ufo-body-top)" }} />
+          <stop offset="1" style={{ stopColor: "var(--ufo-body-bottom)" }} />
+        </linearGradient>
+      </defs>
+      {/* Beam glow */}
+      <ellipse cx="32" cy="38" rx="17" ry="4" style={{ fill: "var(--ufo-glow)" }} />
+      {/* Alien pilot */}
+      <line x1="29" y1="12" x2="26.5" y2="7.5" stroke="#5eead4" strokeWidth="1" strokeLinecap="round" />
+      <line x1="35" y1="12" x2="37.5" y2="7.5" stroke="#5eead4" strokeWidth="1" strokeLinecap="round" />
+      <circle cx="26.3" cy="7.2" r="1.3" fill="#7dd3fc" />
+      <circle cx="37.7" cy="7.2" r="1.3" fill="#7dd3fc" />
+      <ellipse cx="32" cy="17" rx="5.6" ry="6" fill="#5eead4" />
+      <ellipse cx="29.8" cy="17" rx="1.8" ry="2.3" fill="#0b1026" />
+      <ellipse cx="34.2" cy="17" rx="1.8" ry="2.3" fill="#0b1026" />
+      <circle cx="30.3" cy="16.2" r="0.55" fill="#fff" />
+      <circle cx="34.7" cy="16.2" r="0.55" fill="#fff" />
+      {/* Glass dome */}
+      <path d="M20 24c0-8 5.4-14 12-14s12 6 12 14z" fill="rgb(186 230 253 / 0.28)" stroke="rgb(186 230 253 / 0.7)" strokeWidth="0.8" />
+      <path d="M24 19c1.2-3.4 3.6-5.6 6.4-6.2" fill="none" stroke="rgb(255 255 255 / 0.7)" strokeWidth="1" strokeLinecap="round" />
+      {/* Saucer */}
+      <ellipse cx="32" cy="28" rx="27" ry="7" fill="url(#ufo-body)" />
+      <ellipse cx="32" cy="25.5" rx="20" ry="2.6" fill="rgb(255 255 255 / 0.22)" />
+      {[12, 22, 32, 42, 52].map((x, i) => (
+        <circle key={x} className="ufo-light" style={{ animationDelay: `${i * 0.25}s` }} cx={x} cy={i % 4 === 0 ? 28.5 : 30.5} r="1.4" fill="#fde68a" />
+      ))}
+    </svg>
+  );
+}
+
 export function SkyBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const nebulaRef = useRef<HTMLDivElement>(null);
@@ -345,6 +380,14 @@ export function SkyBackground() {
           </div>
         </div>
       ))}
+
+      <div className="ufo-lane" aria-hidden>
+        <div className="ufo">
+          <div className="ufo-bob">
+            <Ufo />
+          </div>
+        </div>
+      </div>
 
       {/* Soft vignette keeps content readable over the sky */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,color-mix(in_oklab,var(--background)_55%,transparent)_100%)]" />

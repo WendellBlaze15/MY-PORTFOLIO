@@ -13,6 +13,8 @@ export type SocialLink = {
 export type StatItem = {
   value: string;
   label: string;
+  /** When set, the value is a number that animates (count-up). */
+  count?: number;
 };
 
 export type SkillCategory = {

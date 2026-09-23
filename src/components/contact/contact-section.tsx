@@ -1,6 +1,7 @@
 import { ArrowUpRight, Mail, MapPin, Send } from "lucide-react";
 
 import { Reveal } from "@/components/animations/reveal";
+import { ContactForm } from "@/components/contact/contact-form";
 import { CopyEmailButton } from "@/components/shared/copy-email-button";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/social-icons";
@@ -27,7 +28,7 @@ export function ContactSection() {
         </Reveal>
 
         <Reveal delay={0.05}>
-          <div className="glass-card relative grid gap-8 overflow-hidden p-6 sm:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
+          <div className="glass-card relative grid gap-8 overflow-hidden p-5 sm:p-8 lg:grid-cols-[0.85fr_1.15fr] lg:p-10">
             <div
               className="absolute -top-24 -left-24 size-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--primary)_22%,transparent),transparent_70%)]"
               aria-hidden
@@ -38,8 +39,8 @@ export function ContactSection() {
                 <Send className="size-5" />
               </div>
               <p className="text-lg leading-relaxed text-muted-foreground">
-                The best way to reach me right now is through the channels
-                listed here — I&apos;m happy to talk about projects,
+                Send me a message using the form, or reach me through the
+                channels below — I&apos;m happy to talk about projects,
                 opportunities, and ideas.
               </p>
               <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-300">
@@ -69,38 +70,42 @@ export function ContactSection() {
                   ) : null}
                 </ul>
               ) : null}
+
+              <div className="flex flex-col gap-3">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="focus-ring group flex items-center gap-4 rounded-2xl border border-border bg-foreground/[0.03] p-3.5 transition hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/5"
+                  >
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-foreground/[0.06] text-foreground transition group-hover:bg-primary group-hover:text-white">
+                      <SocialIcon label={link.label} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-semibold">{link.label}</span>
+                      <span className="block truncate text-sm text-muted-foreground">
+                        {link.display ?? link.label}
+                      </span>
+                    </span>
+                    <ArrowUpRight className="size-5 shrink-0 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
+                  </a>
+                ))}
+
+                {email ? (
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    <Button size="lg" variant="outline" render={<a href={`mailto:${email}`} />}>
+                      <Mail /> Email me
+                    </Button>
+                    <CopyEmailButton email={email} />
+                  </div>
+                ) : null}
+              </div>
             </div>
 
-            <div className="relative flex flex-col justify-center gap-3">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="focus-ring group flex items-center gap-4 rounded-2xl border border-border bg-foreground/[0.03] p-4 transition hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/5 sm:p-5"
-                >
-                  <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-foreground/[0.06] text-foreground transition group-hover:bg-primary group-hover:text-white">
-                    <SocialIcon label={link.label} />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block font-semibold">{link.label}</span>
-                    <span className="block truncate text-sm text-muted-foreground">
-                      {link.display ?? link.label}
-                    </span>
-                  </span>
-                  <ArrowUpRight className="size-5 shrink-0 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
-                </a>
-              ))}
-
-              {email ? (
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <Button size="lg" render={<a href={`mailto:${email}`} />}>
-                    <Mail /> Email me
-                  </Button>
-                  <CopyEmailButton email={email} />
-                </div>
-              ) : null}
+            <div className="relative">
+              <ContactForm />
             </div>
           </div>
         </Reveal>

@@ -65,8 +65,8 @@ const technologyCount = skillCategories.reduce(
 
 /** Derived from the data above so the numbers never drift from the content. */
 export const heroStats: StatItem[] = [
-  { value: String(projects.length), label: "Projects showcased" },
-  { value: String(technologyCount), label: "Technologies & tools" },
-  { value: "BSIT", label: "Degree in progress" },
+  { value: String(projects.length), count: projects.length, label: "Projects showcased" },
+  { value: String(technologyCount), count: technologyCount, label: "Technologies & tools" },
+  { value: "BSIT", label: "4th Year IT Student" },
   { value: "LSPU", label: "Santa Cruz Campus" },
 ];

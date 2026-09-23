@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 
 import { Reveal } from "@/components/animations/reveal";
+import { CountUp } from "@/components/hero/count-up";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/social-icons";
 import { Button } from "@/components/ui/button";
 import { heroStats, siteConfig, socialLinks } from "@/data/site";
@@ -159,7 +160,7 @@ export function HeroSection() {
           <Reveal key={stat.label} delay={0.05 * index}>
             <div className="glass-card card-hover flex h-full flex-col gap-1 p-4 sm:p-5">
               <p className="text-gradient text-2xl font-bold tracking-tight sm:text-3xl">
-                {stat.value}
+                {stat.count !== undefined ? <CountUp value={stat.count} /> : stat.value}
               </p>
               <p className="text-xs text-muted-foreground sm:text-sm">{stat.label}</p>
             </div>

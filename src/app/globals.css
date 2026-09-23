@@ -103,6 +103,9 @@
   --nebula-c: rgb(244 114 182 / 10%);
   --jet-color: rgb(40 48 90 / 55%);
   --trail-color: rgb(255 255 255 / 85%);
+  --ufo-body-top: #9aa3c7;
+  --ufo-body-bottom: #4b5378;
+  --ufo-glow: rgb(56 189 248 / 35%);
 }
 
 /* Dark — deep night sky */
@@ -150,6 +153,9 @@
   --nebula-c: rgb(236 72 153 / 8%);
   --jet-color: rgb(226 232 255 / 80%);
   --trail-color: rgb(186 200 255 / 45%);
+  --ufo-body-top: #e2e6f7;
+  --ufo-body-bottom: #7c84ab;
+  --ufo-glow: rgb(94 234 212 / 45%);
 }
 
 @layer base {
@@ -363,6 +369,54 @@
   }
 }
 
+/* UFO with an alien pilot: crosses rarely, bobbing gently */
+.ufo-lane {
+  position: absolute;
+  top: 48%;
+  left: 0;
+  width: 100%;
+  height: 0;
+  transform: rotate(-3deg);
+}
+
+.ufo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: fly 84s linear 18s infinite;
+}
+
+.ufo-bob {
+  animation: ufo-bob 2.6s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px var(--ufo-glow));
+}
+
+.ufo-light {
+  animation: ufo-blink 1.4s ease-in-out infinite;
+}
+
+@keyframes ufo-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(3deg);
+  }
+}
+
+@keyframes ufo-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
 @keyframes drift-a {
   from {
     transform: translate3d(0, 0, 0) scale(1);
@@ -431,7 +485,8 @@
     transition-duration: 0.01ms !important;
   }
 
-  .jet {
+  .jet,
+  .ufo {
     display: none;
   }
 }
