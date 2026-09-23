@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 
 import { Reveal } from "@/components/animations/reveal";
+import { CoderCharacter } from "@/components/hero/coder-character";
 import { CountUp } from "@/components/hero/count-up";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/social-icons";
 import { Button } from "@/components/ui/button";
@@ -24,7 +25,6 @@ function OrbitVisual() {
 
         {/* Orbit rings */}
         <div className="absolute inset-[4%] rounded-full border border-dashed border-foreground/12" />
-        <div className="absolute inset-[22%] rounded-full border border-foreground/10" />
 
         {/* Rotating tech badges; each counter-rotates to stay upright */}
         <div className="animate-orbit absolute inset-[4%]">
@@ -48,21 +48,14 @@ function OrbitVisual() {
           })}
         </div>
 
-        {/* Core */}
-        <div className="absolute inset-[30%] flex items-center justify-center">
-          <div className="animate-float glass-card relative flex size-full flex-col items-center justify-center gap-1 rounded-[2rem] text-center">
-            <span className="bg-gradient-to-br from-primary to-sky-500 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
-              {siteConfig.shortName}
-            </span>
-            <span className="px-2 text-[10px] font-medium tracking-[0.2em] text-muted-foreground uppercase sm:text-[11px]">
-              Web Dev
-            </span>
-          </div>
+        {/* Animated developer character */}
+        <div className="absolute inset-[16%]">
+          <CoderCharacter className="size-full drop-shadow-[0_18px_30px_rgb(0_0_0_/_0.25)]" />
         </div>
       </div>
 
-      {/* Code snippet — stacked below on phones/tablets, floating on desktop */}
-      <div className="glass-card relative mx-auto mt-10 w-fit p-3 font-mono text-[11px] leading-relaxed sm:text-xs lg:absolute lg:right-0 lg:bottom-0 lg:mt-0">
+      {/* Code snippet, below the orbit so it never covers the character */}
+      <div className="glass-card relative mx-auto mt-8 w-fit p-3 font-mono text-[11px] leading-relaxed sm:text-xs">
         <div className="mb-1 flex items-center gap-1.5">
           <span className="size-2 rounded-full bg-rose-400/80" />
           <span className="size-2 rounded-full bg-amber-400/80" />
