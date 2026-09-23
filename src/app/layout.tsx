@@ -1,10 +1,12 @@
 import { Analytics } from "@vercel/analytics/next";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { SkyBackground } from "@/components/background/sky-background";
 import { SiteFooter } from "@/components/footer/site-footer";
 import { SiteHeader } from "@/components/navigation/site-header";
 import { siteConfig } from "@/data/site";
+import { themeInitScript } from "@/lib/theme";
 
 import "./globals.css";
 
@@ -60,13 +62,25 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#eef1fb" },
+    { media: "(prefers-color-scheme: dark)", color: "#05060d" },
+  ],
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className="relative flex min-h-full flex-col">
+        <SkyBackground />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

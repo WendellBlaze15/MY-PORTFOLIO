@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --color-background: var(--background);
@@ -42,6 +42,7 @@
   --color-violet: var(--violet);
   --color-violet-foreground: var(--violet-foreground);
   --color-success: var(--success);
+  --color-sky: var(--sky-accent);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -51,74 +52,104 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* Light — soft daylight sky */
 :root {
+  color-scheme: light;
   --radius: 0.75rem;
-  --background: #050506;
-  --foreground: #f4f4f5;
-  --card: #121214;
-  --card-foreground: #f4f4f5;
-  --popover: #121214;
-  --popover-foreground: #f4f4f5;
-  --primary: #8b5cf6;
+  --background: #eef1fb;
+  --foreground: #121328;
+  --card: #ffffff;
+  --card-foreground: #121328;
+  --popover: #ffffff;
+  --popover-foreground: #121328;
+  --primary: #6d3ff0;
   --primary-foreground: #fafafa;
-  --secondary: #1c1c1f;
-  --secondary-foreground: #f4f4f5;
-  --muted: #18181b;
-  --muted-foreground: #a1a1aa;
-  --accent: #1a1528;
-  --accent-foreground: #e9e4ff;
-  --destructive: oklch(0.65 0.2 25);
-  --border: rgb(255 255 255 / 8%);
-  --input: rgb(255 255 255 / 12%);
-  --ring: #8b5cf6;
-  --violet: #8b5cf6;
-  --violet-foreground: #f5f3ff;
-  --success: #34d399;
-  --chart-1: #8b5cf6;
-  --chart-2: #6366f1;
-  --chart-3: #a78bfa;
-  --chart-4: #4f46e5;
-  --chart-5: #c4b5fd;
-  --sidebar: #121214;
-  --sidebar-foreground: #f4f4f5;
-  --sidebar-primary: #8b5cf6;
+  --secondary: #e7e8f5;
+  --secondary-foreground: #121328;
+  --muted: #e4e6f2;
+  --muted-foreground: #4f5270;
+  --accent: #ece6ff;
+  --accent-foreground: #3b1f99;
+  --destructive: oklch(0.58 0.22 25);
+  --border: rgb(30 34 80 / 11%);
+  --input: rgb(30 34 80 / 16%);
+  --ring: #6d3ff0;
+  --violet: #6d3ff0;
+  --violet-foreground: #3b1f99;
+  --success: #059669;
+  --sky-accent: #0284c7;
+  --chart-1: #6d3ff0;
+  --chart-2: #4f46e5;
+  --chart-3: #8b5cf6;
+  --chart-4: #4338ca;
+  --chart-5: #a78bfa;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #121328;
+  --sidebar-primary: #6d3ff0;
   --sidebar-primary-foreground: #fafafa;
-  --sidebar-accent: #1a1528;
-  --sidebar-accent-foreground: #e9e4ff;
-  --sidebar-border: rgb(255 255 255 / 8%);
-  --sidebar-ring: #8b5cf6;
+  --sidebar-accent: #ece6ff;
+  --sidebar-accent-foreground: #3b1f99;
+  --sidebar-border: rgb(30 34 80 / 11%);
+  --sidebar-ring: #6d3ff0;
+
+  --card-surface: rgb(255 255 255 / 72%);
+  --card-shadow: 0 1px 2px rgb(30 34 80 / 6%), 0 12px 32px -12px rgb(30 34 80 / 14%);
+  --header-surface: rgb(244 246 253 / 78%);
+  --sky-top: #c9d8f7;
+  --sky-mid: #e3e8fa;
+  --sky-bottom: #f4f1fb;
+  --nebula-a: rgb(139 92 246 / 16%);
+  --nebula-b: rgb(56 189 248 / 16%);
+  --nebula-c: rgb(244 114 182 / 10%);
+  --jet-color: rgb(40 48 90 / 55%);
+  --trail-color: rgb(255 255 255 / 85%);
 }
 
+/* Dark — deep night sky */
 .dark {
-  --background: #050506;
-  --foreground: #f4f4f5;
-  --card: #121214;
-  --card-foreground: #f4f4f5;
-  --popover: #121214;
-  --popover-foreground: #f4f4f5;
+  color-scheme: dark;
+  --background: #05060d;
+  --foreground: #f1f2f8;
+  --card: #10111c;
+  --card-foreground: #f1f2f8;
+  --popover: #10111c;
+  --popover-foreground: #f1f2f8;
   --primary: #8b5cf6;
   --primary-foreground: #fafafa;
-  --secondary: #1c1c1f;
-  --secondary-foreground: #f4f4f5;
-  --muted: #18181b;
-  --muted-foreground: #a1a1aa;
-  --accent: #1a1528;
+  --secondary: #1a1b28;
+  --secondary-foreground: #f1f2f8;
+  --muted: #171826;
+  --muted-foreground: #a3a6bf;
+  --accent: #1c1631;
   --accent-foreground: #e9e4ff;
   --destructive: oklch(0.65 0.2 25);
-  --border: rgb(255 255 255 / 8%);
-  --input: rgb(255 255 255 / 12%);
+  --border: rgb(255 255 255 / 9%);
+  --input: rgb(255 255 255 / 13%);
   --ring: #8b5cf6;
   --violet: #8b5cf6;
-  --violet-foreground: #f5f3ff;
+  --violet-foreground: #ddd6fe;
   --success: #34d399;
-  --sidebar: #121214;
-  --sidebar-foreground: #f4f4f5;
+  --sky-accent: #38bdf8;
+  --sidebar: #10111c;
+  --sidebar-foreground: #f1f2f8;
   --sidebar-primary: #8b5cf6;
   --sidebar-primary-foreground: #fafafa;
-  --sidebar-accent: #1a1528;
+  --sidebar-accent: #1c1631;
   --sidebar-accent-foreground: #e9e4ff;
-  --sidebar-border: rgb(255 255 255 / 8%);
+  --sidebar-border: rgb(255 255 255 / 9%);
   --sidebar-ring: #8b5cf6;
+
+  --card-surface: rgb(16 17 30 / 62%);
+  --card-shadow: 0 0 0 1px rgb(255 255 255 / 2%), 0 18px 40px -20px rgb(0 0 0 / 70%);
+  --header-surface: rgb(7 8 18 / 70%);
+  --sky-top: #03040a;
+  --sky-mid: #070a1c;
+  --sky-bottom: #0d0a22;
+  --nebula-a: rgb(139 92 246 / 20%);
+  --nebula-b: rgb(56 189 248 / 11%);
+  --nebula-c: rgb(236 72 153 / 8%);
+  --jet-color: rgb(226 232 255 / 80%);
+  --trail-color: rgb(186 200 255 / 45%);
 }
 
 @layer base {
@@ -128,19 +159,15 @@
 
   html {
     @apply scroll-smooth font-sans;
+    scroll-padding-top: 5rem;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
-    background-image:
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgb(139 92 246 / 18%), transparent),
-      radial-gradient(ellipse 60% 40% at 100% 0%, rgb(99 102 241 / 10%), transparent),
-      radial-gradient(ellipse 50% 30% at 0% 100%, rgb(139 92 246 / 8%), transparent);
-    background-attachment: fixed;
   }
 
   ::selection {
-    @apply bg-primary/40 text-foreground;
+    @apply bg-primary/30 text-foreground;
   }
 }
 
@@ -150,15 +177,62 @@
   }
 
   .glass {
-    @apply border border-white/10 bg-white/[0.03] backdrop-blur-xl;
+    background-color: var(--header-surface);
+    @apply backdrop-blur-xl backdrop-saturate-150;
   }
 
   .glass-card {
-    @apply rounded-2xl border border-white/10 bg-card/80 shadow-[0_0_0_1px_rgb(255_255_255_/_0.02)] backdrop-blur-md;
+    background-color: var(--card-surface);
+    box-shadow: var(--card-shadow);
+    @apply rounded-2xl border border-border backdrop-blur-md;
+  }
+
+  /* Hover lift + glowing border, used on interactive cards */
+  .card-hover {
+    @apply transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-primary/35;
+  }
+
+  .card-hover:hover {
+    box-shadow:
+      var(--card-shadow),
+      0 20px 50px -24px color-mix(in oklab, var(--primary) 55%, transparent);
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-lg border border-border bg-foreground/[0.035] px-3 py-1.5 text-sm text-foreground/85 transition-colors hover:border-primary/35 hover:text-foreground;
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-violet-300 via-primary to-indigo-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-violet-500 via-primary to-sky-500 bg-clip-text text-transparent dark:from-violet-300 dark:to-sky-300;
+  }
+
+  .text-gradient-animated {
+    background-image: linear-gradient(
+      100deg,
+      var(--foreground) 20%,
+      var(--primary) 45%,
+      var(--sky-accent) 60%,
+      var(--foreground) 85%
+    );
+    background-size: 250% 100%;
+    @apply bg-clip-text text-transparent;
+    animation: gradient-pan 9s ease-in-out infinite alternate;
+  }
+
+  /* Placeholder-free visual used in place of screenshots */
+  .preview-surface {
+    background:
+      radial-gradient(120% 90% at 0% 0%, color-mix(in oklab, var(--primary) 26%, transparent), transparent 60%),
+      radial-gradient(90% 80% at 100% 100%, color-mix(in oklab, var(--sky-accent) 20%, transparent), transparent 60%),
+      color-mix(in oklab, var(--card) 70%, var(--background));
+  }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--foreground) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 7%, transparent) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
   }
 
   .section-padding {
@@ -168,6 +242,180 @@
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
+}
+
+/* ---------- Sky background ---------- */
+
+.sky-gradient {
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, var(--sky-bottom) 100%);
+  transition: background 0.6s ease;
+}
+
+.nebula {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+}
+
+.nebula-a {
+  width: 70vmax;
+  height: 70vmax;
+  top: -30vmax;
+  left: -15vmax;
+  background: radial-gradient(circle, var(--nebula-a), transparent 65%);
+  animation: drift-a 38s ease-in-out infinite alternate;
+}
+
+.nebula-b {
+  width: 60vmax;
+  height: 60vmax;
+  top: 10vh;
+  right: -25vmax;
+  background: radial-gradient(circle, var(--nebula-b), transparent 65%);
+  animation: drift-b 46s ease-in-out infinite alternate;
+}
+
+.nebula-c {
+  width: 55vmax;
+  height: 55vmax;
+  bottom: -30vmax;
+  left: 20vw;
+  background: radial-gradient(circle, var(--nebula-c), transparent 65%);
+  animation: drift-a 52s ease-in-out infinite alternate-reverse;
+}
+
+/* Each jet is a flight lane: the aircraft crosses during the first part of the
+   cycle and stays off-screen for the rest, so flights feel occasional. */
+.jet-lane {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0;
+  transform: rotate(var(--jet-angle, -4deg));
+  transform-origin: center;
+}
+
+.jet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  color: var(--jet-color);
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: fly var(--jet-duration, 60s) linear var(--jet-delay, 0s) infinite;
+}
+
+.jet-reverse .jet {
+  flex-direction: row-reverse;
+  animation-name: fly-reverse;
+}
+
+.jet-trail {
+  height: 1.5px;
+  width: clamp(80px, 16vw, 220px);
+  border-radius: 9999px;
+  background: linear-gradient(90deg, transparent, var(--trail-color));
+}
+
+.jet-reverse .jet-trail {
+  background: linear-gradient(270deg, transparent, var(--trail-color));
+}
+
+.jet-reverse .jet svg {
+  transform: scaleX(-1);
+}
+
+@keyframes fly {
+  0% {
+    transform: translate3d(-30vw, 0, 0);
+    opacity: 0;
+  }
+  2% {
+    opacity: 1;
+  }
+  26% {
+    opacity: 1;
+  }
+  28%,
+  100% {
+    transform: translate3d(120vw, 0, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes fly-reverse {
+  0% {
+    transform: translate3d(120vw, 0, 0);
+    opacity: 0;
+  }
+  2% {
+    opacity: 1;
+  }
+  26% {
+    opacity: 1;
+  }
+  28%,
+  100% {
+    transform: translate3d(-30vw, 0, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes drift-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(6vw, 4vh, 0) scale(1.08);
+  }
+}
+
+@keyframes drift-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+  to {
+    transform: translate3d(-5vw, 6vh, 0) scale(0.95);
+  }
+}
+
+@keyframes gradient-pan {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+.animate-orbit {
+  animation: orbit-spin 60s linear infinite;
+}
+
+.animate-orbit-reverse {
+  animation: orbit-spin 60s linear infinite reverse;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -181,5 +429,9 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .jet {
+    display: none;
   }
 }

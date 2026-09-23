@@ -1,7 +1,6 @@
 "use client";
 
-import { useReducedMotion } from "motion/react";
-import { motion } from "motion/react";
+import { MotionConfig, motion } from "motion/react";
 import type { ReactNode } from "react";
 
 type RevealProps = {
@@ -11,27 +10,28 @@ type RevealProps = {
   y?: number;
 };
 
+/**
+ * Always renders the same element on server and client so hydration never
+ * leaves content stuck at the initial `opacity: 0`. With reduced motion,
+ * MotionConfig drops the slide and keeps only a quick fade.
+ */
 export function Reveal({
   children,
   className,
   delay = 0,
   y = 24,
 }: RevealProps) {
-  const reduceMotion = useReducedMotion();
-
-  if (reduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
+    <MotionConfig reducedMotion="user">
+      <motion.div
+        className={className}
+        initial={{ opacity: 0, y }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {children}
+      </motion.div>
+    </MotionConfig>
   );
 }

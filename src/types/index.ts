@@ -6,29 +6,21 @@ export type NavItem = {
 export type SocialLink = {
   label: string;
   href: string;
-  placeholder?: boolean;
 };
 
 export type StatItem = {
   value: string;
   label: string;
-  placeholder?: boolean;
-};
-
-export type SkillItem = {
-  name: string;
-  placeholder?: boolean;
 };
 
 export type SkillCategory = {
   title: string;
-  skills: SkillItem[];
+  skills: string[];
 };
 
 export type ProjectLink = {
   label: string;
   href: string;
-  placeholder?: boolean;
 };
 
 export type Project = {
@@ -36,18 +28,12 @@ export type Project = {
   title: string;
   description: string;
   category: string;
-  image: string;
   technologies: string[];
   features: string[];
   links: {
     live?: ProjectLink;
-    github?: ProjectLink;
   };
   featured?: boolean;
-  placeholder?: boolean;
-  problem?: string;
-  solution?: string;
-  result?: string;
 };
 
 export type ExperienceItem = {
@@ -55,9 +41,8 @@ export type ExperienceItem = {
   title: string;
   organization: string;
   location?: string;
-  period: string;
+  period?: string;
   description: string[];
-  placeholder?: boolean;
 };
 
 export type EducationItem = {
@@ -65,9 +50,8 @@ export type EducationItem = {
   degree: string;
   school: string;
   campus?: string;
-  period: string;
+  period?: string;
   description?: string;
-  placeholderPeriod?: boolean;
 };
 
 export type CertificationItem = {
@@ -77,5 +61,4 @@ export type CertificationItem = {
   date: string;
   credentialUrl?: string;
   image?: string;
-  placeholder?: boolean;
 };

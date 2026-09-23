@@ -6,9 +6,8 @@ export const educationItems: EducationItem[] = [
     degree: "Bachelor of Science in Information Technology",
     school: "Laguna State Polytechnic University",
     campus: "Santa Cruz Campus",
-    period: "[PLACEHOLDER] Year – Present",
+    period: "Currently enrolled",
     description:
       "Focused on web development, programming, and building modern digital solutions.",
-    placeholderPeriod: true,
   },
 ];

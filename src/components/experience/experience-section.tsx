@@ -1,7 +1,10 @@
+import { BookOpen, Laptop } from "lucide-react";
+
 import { Reveal } from "@/components/animations/reveal";
-import { PlaceholderBadge } from "@/components/shared/placeholder-badge";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { experienceItems } from "@/data/experience";
+
+const icons = [Laptop, BookOpen];
 
 export function ExperienceSection() {
   return (
@@ -11,44 +14,50 @@ export function ExperienceSection() {
           <SectionHeading
             eyebrow="Experience"
             title="Experience & journey"
-            description="A professional timeline of learning and development work. Unverified roles and dates are marked [PLACEHOLDER]."
+            description="How I've been building skills — through university projects and continuous self-directed learning."
           />
         </Reveal>
 
-        <div className="relative ml-3 border-l border-dashed border-primary/30 pl-8 sm:ml-4">
-          {experienceItems.map((item, index) => (
-            <Reveal key={item.id} delay={0.05 * index}>
-              <article className="relative mb-10 last:mb-0">
-                <span
-                  className="absolute top-1.5 -left-[2.45rem] size-3 rounded-full border-2 border-background bg-primary shadow-[0_0_12px_rgb(139_92_246_/_0.8)] sm:-left-[2.55rem]"
-                  aria-hidden
-                />
-                <div className="glass-card space-y-3 p-5 sm:p-6">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <p className="text-sm text-primary">{item.period}</p>
-                    {item.placeholder ? <PlaceholderBadge /> : null}
+        <div className="relative ml-4 space-y-8 border-l border-primary/25 pl-8 sm:ml-5 sm:pl-10">
+          {experienceItems.map((item, index) => {
+            const Icon = icons[index % icons.length];
+            return (
+              <Reveal key={item.id} delay={0.05 * index}>
+                <article className="relative">
+                  <span
+                    className="absolute top-5 -left-[3.15rem] flex size-9 items-center justify-center rounded-full border border-primary/40 bg-background text-primary shadow-[0_0_18px_-4px_var(--primary)] sm:-left-[3.65rem]"
+                    aria-hidden
+                  >
+                    <Icon className="size-4" />
+                  </span>
+                  <div className="glass-card card-hover space-y-3 p-5 sm:p-6">
+                    {item.period ? (
+                      <p className="inline-flex rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary dark:text-violet-200">
+                        {item.period}
+                      </p>
+                    ) : null}
+                    <div>
+                      <h3 className="text-xl font-semibold tracking-tight">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {item.organization}
+                        {item.location ? ` · ${item.location}` : ""}
+                      </p>
+                    </div>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      {item.description.map((line) => (
+                        <li key={line} className="flex gap-2">
+                          <span className="mt-2 size-1.5 shrink-0 rounded-full bg-primary/70" />
+                          <span>{line}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold tracking-tight">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {item.organization}
-                      {item.location ? ` · ${item.location}` : ""}
-                    </p>
-                  </div>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    {item.description.map((line) => (
-                      <li key={line} className="flex gap-2">
-                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-primary/70" />
-                        <span>{line}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            </Reveal>
-          ))}
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

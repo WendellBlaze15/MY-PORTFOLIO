@@ -1,6 +1,12 @@
+import { projects } from "@/data/projects";
+import { skillCategories } from "@/data/skills";
 import type { NavItem, SocialLink, StatItem } from "@/types";
 
-/** Confirmed personal information only. Unverified values use [PLACEHOLDER]. */
+/**
+ * Confirmed personal information only. Optional fields (email, location,
+ * LinkedIn, resume) stay empty until real values are available — the UI hides
+ * anything that is not set.
+ */
 export const siteConfig = {
   name: "Wendell Derama Ramos",
   shortName: "WR",
@@ -9,11 +15,13 @@ export const siteConfig = {
     "I build modern, useful, and polished digital experiences with a focus on clean UI and thoughtful UX.",
   description:
     "Portfolio of Wendell Derama Ramos — Information Technology student and aspiring web developer specializing in modern web applications, UI/UX, and thoughtful digital experiences.",
-  email: "[PLACEHOLDER]",
-  location: "[PLACEHOLDER]",
+  /** Public contact email. Leave empty to hide email actions. */
+  email: "",
+  /** City / region. Leave empty to hide. */
+  location: "",
   availability: "Available for opportunities",
-  githubUsername: "WendellBlaze15",
   resumePath: "/resume/wendell-ramos-resume.pdf",
+  /** Set to true after adding the PDF at `resumePath`. */
   resumeAvailable: false,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://wendellramos.vercel.app",
   interests: [
@@ -24,7 +32,7 @@ export const siteConfig = {
     "Artificial Intelligence (AI)",
     "Building modern web applications",
   ],
-} as const;
+};
 
 export const navItems: NavItem[] = [
   { label: "Home", href: "#home" },
@@ -36,26 +44,23 @@ export const navItems: NavItem[] = [
   { label: "Contact", href: "#contact" },
 ];
 
+/** Add LinkedIn here (e.g. `{ label: "LinkedIn", href: "https://..." }`) once confirmed. */
 export const socialLinks: SocialLink[] = [
   {
     label: "GitHub",
     href: "https://github.com/WendellBlaze15",
   },
-  {
-    label: "LinkedIn",
-    href: "[PLACEHOLDER]",
-    placeholder: true,
-  },
-  {
-    label: "Email",
-    href: "[PLACEHOLDER]",
-    placeholder: true,
-  },
 ];
 
+const technologyCount = skillCategories.reduce(
+  (total, category) => total + category.skills.length,
+  0
+);
+
+/** Derived from the data above so the numbers never drift from the content. */
 export const heroStats: StatItem[] = [
-  { value: "[PLACEHOLDER]", label: "Projects Completed", placeholder: true },
-  { value: "[PLACEHOLDER]", label: "Technologies", placeholder: true },
-  { value: "[PLACEHOLDER]", label: "Years of Learning", placeholder: true },
-  { value: "[PLACEHOLDER]", label: "Dedication", placeholder: true },
+  { value: String(projects.length), label: "Projects showcased" },
+  { value: String(technologyCount), label: "Technologies & tools" },
+  { value: "BSIT", label: "Degree in progress" },
+  { value: "LSPU", label: "Santa Cruz Campus" },
 ];

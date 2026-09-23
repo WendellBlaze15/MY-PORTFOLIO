@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { navItems, siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
@@ -52,28 +53,42 @@ export function SiteHeader() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled || open ? "glass border-b border-white/10" : "bg-transparent"
+        scrolled || open
+          ? "glass border-b border-border shadow-[0_8px_30px_-18px_rgb(0_0_0_/_0.35)]"
+          : "border-b border-transparent bg-transparent"
       )}
     >
       <div className="container-narrow flex h-16 items-center justify-between gap-4">
         <Link
           href="#home"
-          className="focus-ring rounded-md text-lg font-semibold tracking-tight"
+          className="focus-ring group flex items-center gap-2.5 rounded-md"
           onClick={() => setOpen(false)}
+          aria-label={`${siteConfig.name} — home`}
         >
-          <span className="text-primary">{siteConfig.shortName}</span>
+          <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-sky-500 text-sm font-bold text-white shadow-[0_6px_20px_-6px_var(--primary)] transition-transform duration-300 group-hover:rotate-6">
+            {siteConfig.shortName}
+          </span>
+          <span className="hidden text-sm font-semibold tracking-tight sm:inline">
+            {siteConfig.name.split(" ")[0]}
+            <span className="text-primary">.</span>
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+        <nav
+          className="hidden items-center gap-0.5 rounded-full border border-border bg-foreground/[0.03] p-1 lg:flex"
+          aria-label="Primary"
+        >
           {navItems.map((item) => {
             const id = item.href.replace("#", "");
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={active === id ? "true" : undefined}
                 className={cn(
-                  "focus-ring rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground",
-                  active === id && "text-foreground"
+                  "focus-ring rounded-full px-3.5 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground",
+                  active === id &&
+                    "bg-primary/12 font-medium text-primary dark:bg-primary/20 dark:text-violet-200"
                 )}
               >
                 {item.label}
@@ -83,20 +98,18 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button
-            render={<a href={siteConfig.resumePath} />}
-            variant="outline"
-            size="sm"
-            className="hidden border-primary/40 text-primary hover:bg-primary/10 sm:inline-flex"
-            aria-disabled={!siteConfig.resumeAvailable}
-            onClick={(event) => {
-              if (!siteConfig.resumeAvailable) {
-                event.preventDefault();
-              }
-            }}
-          >
-            Download Resume
-          </Button>
+          {siteConfig.resumeAvailable ? (
+            <Button
+              render={<a href={siteConfig.resumePath} download />}
+              variant="outline"
+              size="sm"
+              className="hidden border-primary/40 text-primary hover:bg-primary/10 sm:inline-flex"
+            >
+              Download Resume
+            </Button>
+          ) : null}
+
+          <ThemeToggle />
 
           <Button
             type="button"
@@ -116,7 +129,7 @@ export function SiteHeader() {
       {open ? (
         <div
           id="mobile-nav"
-          className="border-t border-white/10 bg-background/95 lg:hidden"
+          className="border-t border-border lg:hidden"
         >
           <nav
             className="container-narrow flex flex-col gap-1 py-4"
@@ -126,25 +139,25 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="focus-ring rounded-lg px-3 py-3 text-base text-foreground hover:bg-white/5"
+                className={cn(
+                  "focus-ring rounded-lg px-3 py-3 text-base text-foreground/85 transition-colors hover:bg-foreground/5",
+                  active === item.href.slice(1) && "bg-primary/10 text-primary"
+                )}
                 onClick={() => setOpen(false)}
               >
                 {item.label}
               </Link>
             ))}
-            <Button
-              render={<a href={siteConfig.resumePath} />}
-              variant="outline"
-              className="mt-2 border-primary/40 text-primary"
-              onClick={(event) => {
-                if (!siteConfig.resumeAvailable) event.preventDefault();
-                setOpen(false);
-              }}
-            >
-              Download Resume {[!siteConfig.resumeAvailable && "[PLACEHOLDER]"]
-                .filter(Boolean)
-                .join(" ")}
-            </Button>
+            {siteConfig.resumeAvailable ? (
+              <Button
+                render={<a href={siteConfig.resumePath} download />}
+                variant="outline"
+                className="mt-2 border-primary/40 text-primary"
+                onClick={() => setOpen(false)}
+              >
+                Download Resume
+              </Button>
+            ) : null}
           </nav>
         </div>
       ) : null}

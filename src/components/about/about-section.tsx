@@ -1,10 +1,10 @@
-import { CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Compass, GraduationCap } from "lucide-react";
 import Link from "next/link";
 
 import { Reveal } from "@/components/animations/reveal";
-import { PlaceholderBadge } from "@/components/shared/placeholder-badge";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Button } from "@/components/ui/button";
+import { educationItems } from "@/data/education";
 import { siteConfig } from "@/data/site";
 
 const focusPoints = [
@@ -15,6 +15,8 @@ const focusPoints = [
 ];
 
 export function AboutSection() {
+  const education = educationItems[0];
+
   return (
     <section id="about" className="section-padding">
       <div className="container-narrow grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
@@ -36,10 +38,13 @@ export function AboutSection() {
             </p>
           </div>
 
-          <ul className="mt-6 space-y-3">
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
             {focusPoints.map((point) => (
-              <li key={point} className="flex items-start gap-3 text-sm sm:text-base">
-                <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary" />
+              <li
+                key={point}
+                className="glass-card flex items-start gap-3 p-3.5 text-sm"
+              >
+                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
                 <span>{point}</span>
               </li>
             ))}
@@ -47,33 +52,62 @@ export function AboutSection() {
 
           <Button
             render={<Link href="#contact" />}
-            className="mt-8"
+            className="mt-8 h-11 rounded-xl px-5"
             size="lg"
           >
-            More About Me
+            Let&apos;s Connect
+            <ArrowRight data-icon="inline-end" />
           </Button>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="relative">
-            <div className="glass-card overflow-hidden">
-              <div className="flex aspect-[4/3] flex-col items-center justify-center border-b border-white/10 bg-gradient-to-br from-[#1a1528] to-[#0c0c0e] p-6 text-center">
-                <p className="text-sm font-medium">Workspace photo</p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Add a desk / coding setup image
-                </p>
-                <PlaceholderBadge className="mt-3" />
-              </div>
-              <div className="space-y-2 p-5">
-                <div className="flex items-center gap-2">
-                  <p className="text-sm font-medium text-primary">Current Focus</p>
+          <div className="glass-card relative overflow-hidden">
+            <div className="preview-surface relative border-b border-border p-6">
+              <div className="grid-lines absolute inset-0" aria-hidden />
+              <div className="relative flex items-center gap-3">
+                <div className="flex size-11 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                  <Compass className="size-5" />
                 </div>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  Building responsive web applications and exploring new
-                  technologies across UI/UX, frontend engineering, and AI-assisted
-                  development.
-                </p>
+                <div>
+                  <p className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
+                    Current Focus
+                  </p>
+                  <p className="font-semibold">Modern web applications</p>
+                </div>
               </div>
+              <p className="relative mt-4 text-sm leading-relaxed text-muted-foreground">
+                Building responsive web applications and exploring new
+                technologies across UI/UX, frontend engineering, and
+                AI-assisted development.
+              </p>
+            </div>
+
+            <div className="space-y-5 p-6">
+              <div>
+                <p className="mb-3 text-xs font-medium tracking-wider text-muted-foreground uppercase">
+                  Interests
+                </p>
+                <ul className="flex flex-wrap gap-2">
+                  {siteConfig.interests.map((interest) => (
+                    <li key={interest} className="chip text-xs sm:text-sm">
+                      {interest}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {education ? (
+                <div className="flex items-start gap-3 rounded-xl border border-border bg-foreground/[0.03] p-4">
+                  <GraduationCap className="mt-0.5 size-5 shrink-0 text-primary" />
+                  <div className="text-sm">
+                    <p className="font-medium">{education.degree}</p>
+                    <p className="text-muted-foreground">
+                      {education.school}
+                      {education.campus ? ` — ${education.campus}` : ""}
+                    </p>
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
         </Reveal>

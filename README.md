@@ -31,7 +31,14 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Content
 
-Portfolio content lives in `src/data/`. Confirmed facts are shipped as-is. Unverified items are marked `[PLACEHOLDER]`.
+Portfolio content lives in `src/data/`. Only confirmed facts are listed; optional details are hidden until they are filled in:
+
+- `email`, `location` in `src/data/site.ts` — shown in Contact/Footer when non-empty
+- LinkedIn — add an entry to `socialLinks` in `src/data/site.ts`
+- Project live URLs — add `links.live` in `src/data/projects.ts`
+- Certifications — add entries in `src/data/certifications.ts` (section appears automatically)
+
+The site supports light and dark themes (toggle in the header; defaults to the OS preference) over an animated sky background (`src/components/background/sky-background.tsx`) that respects `prefers-reduced-motion`.
 
 To enable the resume download:
 

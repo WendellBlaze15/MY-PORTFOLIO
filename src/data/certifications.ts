@@ -1,7 +1,4 @@
 import type { CertificationItem } from "@/types";
 
-/**
- * No certifications confirmed yet.
- * Keep empty to render an honest empty state, or add drafts with placeholder: true.
- */
+/** The certifications section only renders once at least one entry exists. */
 export const certifications: CertificationItem[] = [];
