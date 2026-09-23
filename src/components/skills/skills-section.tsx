@@ -1,15 +1,41 @@
-import { Code2, Server, Users, Wrench } from "lucide-react";
-import type { ComponentType, SVGProps } from "react";
-
 import { Reveal } from "@/components/animations/reveal";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { SkillCard, type SkillIcon } from "@/components/skills/skill-card";
 import { skillCategories, softSkills } from "@/data/skills";
 
-const categoryIcons: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
-  Frontend: Code2,
-  Backend: Server,
-  "Tools & Others": Wrench,
+const categoryIcons: Record<string, SkillIcon> = {
+  Frontend: "frontend",
+  Backend: "backend",
+  "Tools & Others": "tools",
 };
+
+const allSkills = skillCategories.flatMap((category) => category.skills);
+const half = Math.ceil(allSkills.length / 2);
+const marqueeRows = [allSkills.slice(0, half), allSkills.slice(half)];
+
+/** Infinite scrolling row; content is duplicated so the loop is seamless. */
+function MarqueeRow({ items, reverse }: { items: string[]; reverse?: boolean }) {
+  return (
+    <div className="marquee group/marquee flex overflow-hidden">
+      {[0, 1].map((copy) => (
+        <ul
+          key={copy}
+          className={reverse ? "marquee-track marquee-reverse" : "marquee-track"}
+          aria-hidden={copy === 1 || undefined}
+        >
+          {items.map((skill) => (
+            <li
+              key={skill}
+              className="rounded-full border border-border bg-foreground/[0.03] px-4 py-2 text-sm whitespace-nowrap text-foreground/75"
+            >
+              {skill}
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  );
+}
 
 export function SkillsSection() {
   return (
@@ -22,56 +48,32 @@ export function SkillsSection() {
             description="The languages, frameworks, and tools I work with while building web applications."
           />
         </Reveal>
+      </div>
 
+      <Reveal className="mb-10 space-y-3">
+        <MarqueeRow items={marqueeRows[0]} />
+        <MarqueeRow items={marqueeRows[1]} reverse />
+      </Reveal>
+
+      <div className="container-narrow">
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {skillCategories.map((category, index) => {
-            const Icon = categoryIcons[category.title] ?? Code2;
-            return (
-              <Reveal key={category.title} delay={0.05 * index}>
-                <article className="glass-card card-hover h-full p-5 sm:p-6">
-                  <div className="mb-5 flex items-center gap-3">
-                    <div className="flex size-10 items-center justify-center rounded-xl bg-primary/12 text-primary">
-                      <Icon className="size-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold">{category.title}</h3>
-                      <p className="text-xs text-muted-foreground">
-                        {category.skills.length} technologies
-                      </p>
-                    </div>
-                  </div>
-                  <ul className="flex flex-wrap gap-2">
-                    {category.skills.map((skill) => (
-                      <li key={skill} className="chip">
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              </Reveal>
-            );
-          })}
+          {skillCategories.map((category) => (
+            <SkillCard
+              key={category.title}
+              title={category.title}
+              skills={category.skills}
+              icon={categoryIcons[category.title] ?? "frontend"}
+              className={category.title === "Backend" ? "md:row-span-2 xl:row-span-1" : undefined}
+            />
+          ))}
 
-          <Reveal delay={0.15} className="md:col-span-2 xl:col-span-3">
-            <article className="glass-card h-full p-5 sm:p-6">
-              <div className="mb-5 flex items-center gap-3">
-                <div className="flex size-10 items-center justify-center rounded-xl bg-sky/12 text-sky">
-                  <Users className="size-5" />
-                </div>
-                <h3 className="text-lg font-semibold">Soft Skills</h3>
-              </div>
-              <ul className="flex flex-wrap gap-2">
-                {softSkills.map((skill) => (
-                  <li
-                    key={skill}
-                    className="rounded-lg border border-primary/20 bg-primary/10 px-3 py-1.5 text-sm text-violet-foreground"
-                  >
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </Reveal>
+          <SkillCard
+            title="Soft Skills"
+            skills={softSkills}
+            icon="soft"
+            variant="soft"
+            className="md:col-span-2 xl:col-span-3"
+          />
         </div>
       </div>
     </section>

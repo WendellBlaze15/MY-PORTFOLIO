@@ -369,6 +369,90 @@
   }
 }
 
+/* ---------- Skills ---------- */
+
+.marquee {
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.75rem;
+  padding-right: 0.75rem;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+/* Gradient accent line that sweeps across the top of a skill card */
+.skill-card-line {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), var(--sky-accent), transparent);
+  background-size: 200% 100%;
+  opacity: 0.55;
+  animation: line-sweep 6s linear infinite;
+  transition: opacity 0.3s ease;
+}
+
+.skill-card:hover .skill-card-line {
+  opacity: 1;
+}
+
+@keyframes line-sweep {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Soft glow that follows the cursor (position set from JS) */
+.skill-card-spotlight {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 0%),
+    color-mix(in oklab, var(--primary) 14%, transparent),
+    transparent 70%
+  );
+  transition: opacity 0.3s ease;
+}
+
+.skill-card:hover .skill-card-spotlight {
+  opacity: 1;
+}
+
+.skill-card {
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.skill-card:hover {
+  border-color: color-mix(in oklab, var(--primary) 35%, transparent);
+  box-shadow:
+    var(--card-shadow),
+    0 20px 50px -24px color-mix(in oklab, var(--primary) 55%, transparent);
+}
+
 /* UFO with an alien pilot: crosses rarely, bobbing gently */
 .ufo-lane {
   position: absolute;
