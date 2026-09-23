@@ -72,6 +72,10 @@ export function ContactSection() {
                 </ul>
               ) : null}
 
+              {location ? (
+                <LocationMap address={location} query={siteConfig.mapQuery} />
+              ) : null}
+
               <div className="flex flex-col gap-3">
                 {socialLinks.map((link) => (
                   <a
@@ -109,11 +113,6 @@ export function ContactSection() {
               <ContactForm />
             </div>
 
-            {location ? (
-              <div className="relative lg:col-span-2">
-                <LocationMap address={location} query={siteConfig.mapQuery} />
-              </div>
-            ) : null}
           </div>
         </Reveal>
       </div>

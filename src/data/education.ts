@@ -30,7 +30,7 @@ export const educationItems: EducationItem[] = [
     id: "elementary",
     level: "Elementary",
     degree: "Elementary",
-    school: "Pinagbayanan",
+    school: "Pinagbayanan Elementary School",
     campus: "Pila, Laguna",
   },
 ];
