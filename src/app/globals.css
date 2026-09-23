@@ -406,29 +406,6 @@
   }
 }
 
-/* Alien mascot: cursor parallax (vars set from JS) + idle breathing */
-.mascot-parallax {
-  transform: perspective(1000px) rotateY(calc(var(--eye-x, 0) * 4deg))
-    rotateX(calc(var(--eye-y, 0) * -3deg))
-    translate3d(calc(var(--eye-x, 0) * -6px), calc(var(--eye-y, 0) * -4px), 0);
-  will-change: transform;
-}
-
-@keyframes breathe {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.012);
-  }
-}
-
-.mascot-breathe {
-  transform-origin: 55% 90%;
-  animation: breathe 5s ease-in-out infinite;
-}
-
 .animate-float {
   animation: float-y 6s ease-in-out infinite;
 }
