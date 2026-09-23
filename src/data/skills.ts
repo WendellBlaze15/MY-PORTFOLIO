@@ -11,8 +11,6 @@ export const skillCategories: SkillCategory[] = [
       "React",
       "Next.js",
       "Tailwind CSS",
-      "Django",
-      "PHP",
     ],
   },
   {
@@ -21,6 +19,8 @@ export const skillCategories: SkillCategory[] = [
       "Node.js",
       "Express.js",
       "Python",
+      "Django",
+      "PHP",
       "Flask",
       "Flask REST API",
       "Flask-SocketIO",
