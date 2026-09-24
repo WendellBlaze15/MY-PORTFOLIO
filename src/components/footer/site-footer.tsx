@@ -2,6 +2,7 @@ import { ArrowUp, ArrowUpRight, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
 import type { ComponentType, SVGProps } from "react";
 
+import { CoderAvatar } from "@/components/shared/coder-avatar";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/social-icons";
 import { siteConfig, socialLinks } from "@/data/site";
 
@@ -31,9 +32,7 @@ export function SiteFooter() {
           {/* Brand */}
           <div className="max-w-md space-y-4">
             <div className="flex items-center gap-3">
-              <span className="flex size-11 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-sky-500 text-base font-bold text-white shadow-[0_10px_30px_-10px_var(--primary)]">
-                {siteConfig.shortName}
-              </span>
+              <CoderAvatar className="size-12 shrink-0 rounded-full ring-2 ring-primary/40 ring-offset-2 ring-offset-background shadow-[0_10px_30px_-10px_var(--primary)]" />
               <div>
                 <p className="font-semibold tracking-tight">{siteConfig.name}</p>
                 <p className="text-xs text-muted-foreground">{siteConfig.title}</p>
@@ -120,19 +119,13 @@ export function SiteFooter() {
           <p className="text-xs text-muted-foreground">
             © {year} {siteConfig.name}. All rights reserved.
           </p>
-          <div className="flex items-center gap-3">
-            <p className="text-xs text-muted-foreground">
-              Built with <span className="font-medium text-foreground">Next.js</span> &amp;{" "}
-              <span className="font-medium text-foreground">Tailwind CSS</span>
-            </p>
-            <Link
-              href="#home"
-              className="focus-ring inline-flex size-10 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 text-primary transition hover:-translate-y-0.5 hover:bg-primary/15"
-              aria-label="Back to top"
-            >
-              <ArrowUp className="size-4" />
-            </Link>
-          </div>
+          <Link
+            href="#home"
+            className="focus-ring inline-flex size-10 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 text-primary transition hover:-translate-y-0.5 hover:bg-primary/15"
+            aria-label="Back to top"
+          >
+            <ArrowUp className="size-4" />
+          </Link>
         </div>
       </div>
     </footer>

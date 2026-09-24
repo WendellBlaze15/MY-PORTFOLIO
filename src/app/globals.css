@@ -389,12 +389,17 @@
   animation: coder-breathe 4s ease-in-out infinite;
 }
 
+/* Hands take turns pressing keys */
 .coder-arm-left {
-  animation: coder-type 0.36s ease-in-out infinite alternate;
+  animation: coder-type 0.34s ease-in-out infinite alternate;
 }
 
 .coder-arm-right {
-  animation: coder-type 0.36s ease-in-out -0.18s infinite alternate;
+  animation: coder-type 0.3s ease-in-out -0.17s infinite alternate;
+}
+
+.coder-key {
+  animation: coder-key 1.2s steps(1) infinite;
 }
 
 /* Turn to face the viewer every ~9s */
@@ -446,10 +451,23 @@
 
 @keyframes coder-type {
   from {
-    transform: translateY(0);
+    transform: translate(0, -1.5px);
   }
   to {
-    transform: translateY(-2px);
+    transform: translate(0.5px, 1px);
+  }
+}
+
+@keyframes coder-key {
+  0%,
+  100% {
+    fill: #4b5275;
+  }
+  8% {
+    fill: #a5b4fc;
+  }
+  16% {
+    fill: #4b5275;
   }
 }
 

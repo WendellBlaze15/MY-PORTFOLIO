@@ -39,6 +39,22 @@ Without this step, replies go to your own address.
 2. **To Email:** `{{from_email}}`; **Subject:** `Thanks for reaching out, {{from_name}}!`
 3. **Code Editor** → paste [`auto-reply-template.html`](./auto-reply-template.html) → **Save**.
 
+## 4. Make replies land in the sender's Primary inbox
+
+When you press **Reply**, the email is sent from your own Gmail account, which Google already signs (SPF/DKIM), so it usually lands in the inbox. To keep it out of Spam and Promotions:
+
+1. **Use the Gmail service in EmailJS.** Go to EmailJS → **Email Services** and check that the service is **Gmail**, connected to `wendellramos400@gmail.com`, not "EmailJS default" or a custom SMTP. That way the auto-reply is also sent and signed by Gmail.
+2. **Keep the auto-reply plain.** [`auto-reply-template.html`](./auto-reply-template.html) is intentionally simple: no banner, no big button, one link. Designed newsletter-style mail gets sorted into Promotions.
+3. **Write replies like a person.**
+   - Keep the subject line (`Re: …`).
+   - Write a few normal sentences.
+   - Delete the long quoted template under your reply (click `•••` in the reply box to show it).
+   - Avoid ALL CAPS, lots of links, link shorteners and attachments in the first reply.
+4. **Train the recipient's inbox once.** The first time, ask the person to check Spam/Promotions and mark your email **Not spam** or drag it to **Primary**. Adding each other as contacts also helps. Gmail and Outlook learn from this.
+5. Don't send many identical replies at once. Bulk-looking mail is treated as marketing.
+
+No setting can *guarantee* the inbox. The recipient's email provider makes the final call, but the steps above give your replies the best chance of landing in Primary.
+
 ## Check it
 
 Send a message from the site with a different email address. In Gmail, open the message and press **Reply**. The **To** field should show the sender's email, not yours.
