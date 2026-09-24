@@ -21,25 +21,45 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Scroll spy: the active section is the last one whose top has passed a line
+  // 35% down the viewport. Recomputed from scroll position on every frame so
+  // it never lags behind fast jumps or short sections.
   useEffect(() => {
     const sections = navItems
-      .map((item) => document.querySelector(item.href))
-      .filter(Boolean) as HTMLElement[];
+      .map((item) => document.querySelector<HTMLElement>(item.href))
+      .filter((section): section is HTMLElement => Boolean(section));
 
     if (!sections.length) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target?.id) setActive(visible.target.id);
-      },
-      { rootMargin: "-35% 0px -50% 0px", threshold: [0.1, 0.25, 0.5] }
-    );
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const line = window.innerHeight * 0.35;
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+      let current = sections[0].id;
+      if (atBottom) {
+        current = sections[sections.length - 1].id;
+      } else {
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top <= line) current = section.id;
+        }
+      }
+      setActive(current);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
@@ -70,6 +90,7 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={active === id ? "true" : undefined}
+                onClick={() => setActive(id)}
                 className={cn(
                   "focus-ring rounded-full px-3.5 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground",
                   active === id &&
@@ -128,7 +149,10 @@ export function SiteHeader() {
                   "focus-ring rounded-lg px-3 py-3 text-base text-foreground/85 transition-colors hover:bg-foreground/5",
                   active === item.href.slice(1) && "bg-primary/10 text-primary"
                 )}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setActive(item.href.slice(1));
+                  setOpen(false);
+                }}
               >
                 {item.label}
               </Link>
