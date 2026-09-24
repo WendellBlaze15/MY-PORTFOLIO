@@ -110,17 +110,26 @@ export function ContactForm() {
     setStatus("sending");
     setFeedback("");
 
+    const name = values.name.trim();
+    const email = values.email.trim();
+
     try {
+      // `reply_to` only takes effect when the EmailJS template's "Reply To"
+      // field is set to {{reply_to}} — see docs/emailjs/README.md
       await send(
         config.serviceId,
         config.templateId,
         {
-          from_name: values.name.trim(),
-          from_email: values.email.trim(),
+          from_name: name,
+          from_email: email,
+          name,
+          email,
           subject: values.subject.trim(),
           message: values.message.trim(),
           to_email: siteConfig.email,
-          reply_to: values.email.trim(),
+          reply_to: email,
+          sent_at: new Date().toLocaleString("en-PH", { dateStyle: "medium", timeStyle: "short" }),
+          site_url: siteConfig.url,
         },
         { publicKey: config.publicKey }
       );

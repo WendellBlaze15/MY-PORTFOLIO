@@ -377,7 +377,7 @@
 
 .coder-body,
 .coder-head,
-.coder-hair,
+.coder-glint,
 .coder-arm-left,
 .coder-arm-right,
 .coder-code-line {
@@ -397,23 +397,24 @@
   animation: coder-type 0.36s ease-in-out -0.18s infinite alternate;
 }
 
-/* Glance back over the shoulder every ~9s */
+/* Turn to face the viewer every ~9s */
 .coder-head {
   transform-origin: 50% 90%;
   animation: coder-look 9s ease-in-out infinite;
 }
 
-.coder-hair {
-  animation: coder-hair 9s ease-in-out infinite;
+.coder-back {
+  animation: coder-back 9s ease-in-out infinite;
 }
 
-.coder-face {
+.coder-front {
   opacity: 0;
-  animation: coder-face 9s ease-in-out infinite;
+  animation: coder-front 9s ease-in-out infinite;
 }
 
-.coder-ear-left {
-  animation: coder-ear 9s ease-in-out infinite;
+.coder-glint {
+  opacity: 0;
+  animation: coder-glint 9s ease-in-out infinite;
 }
 
 .coder-code-line {
@@ -454,14 +455,19 @@
 
 @keyframes coder-look {
   0%,
-  66%,
-  94%,
+  64%,
+  96%,
   100% {
-    transform: rotate(0deg) translate(0, 0);
+    transform: rotate(0deg) scaleX(1);
   }
-  71%,
-  88% {
-    transform: rotate(-9deg) translate(-3px, 1px);
+  /* squash mid-turn so the swap reads as a head turn */
+  69%,
+  91% {
+    transform: rotate(-4deg) scaleX(0.9);
+  }
+  73%,
+  87% {
+    transform: rotate(2deg) scaleX(1) translateY(-1px);
   }
   /* small nod while typing */
   20% {
@@ -472,41 +478,49 @@
   }
 }
 
-@keyframes coder-hair {
+@keyframes coder-back {
   0%,
-  66%,
-  94%,
+  67%,
+  93%,
   100% {
-    transform: translateX(0);
+    opacity: 1;
   }
-  71%,
-  88% {
-    transform: translateX(14px);
+  70%,
+  90% {
+    opacity: 0;
   }
 }
 
-@keyframes coder-face {
+@keyframes coder-front {
   0%,
-  68%,
-  92%,
+  67%,
+  93%,
   100% {
     opacity: 0;
   }
-  72%,
-  88% {
+  70%,
+  90% {
     opacity: 1;
   }
 }
 
-@keyframes coder-ear {
+@keyframes coder-glint {
   0%,
-  66%,
-  94%,
-  100% {
+  75% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  76% {
+    transform: translateX(0);
     opacity: 1;
   }
-  71%,
-  88% {
+  83% {
+    transform: translateX(44px);
+    opacity: 1;
+  }
+  84%,
+  100% {
+    transform: translateX(44px);
     opacity: 0;
   }
 }

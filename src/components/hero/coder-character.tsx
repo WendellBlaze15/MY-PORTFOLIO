@@ -1,7 +1,8 @@
 /**
  * Illustrated developer seen from behind, typing on a laptop. Every few
- * seconds he glances back over his shoulder. Pure SVG + CSS animations
- * (see the `.coder-*` rules in globals.css); static under reduced motion.
+ * seconds he turns to face the viewer — spiky hair, shades, smirk — then gets
+ * back to work. Pure SVG + CSS animations (see the `.coder-*` rules in
+ * globals.css); static under reduced motion.
  */
 
 const CODE_LINES = [
@@ -20,6 +21,8 @@ const SKIN = "#e8b08a";
 const SKIN_SHADE = "#d49a74";
 const HAIR = "#1d1829";
 const HAIR_LIGHT = "#2e2640";
+const LENS_LEFT = "M98.5 104h18.5l-1.2 8.6q-.6 3.6-4.2 3.6h-8q-3.8 0-4.4-3.8z";
+const LENS_RIGHT = "M141.5 104H123l1.2 8.6q.6 3.6 4.2 3.6h8q3.8 0 4.4-3.8z";
 
 export function CoderCharacter({ className }: { className?: string }) {
   return (
@@ -27,7 +30,7 @@ export function CoderCharacter({ className }: { className?: string }) {
       viewBox="0 0 240 240"
       className={className}
       role="img"
-      aria-label="Illustrated developer in a hoodie coding on a laptop"
+      aria-label="Illustrated developer with spiky hair and shades coding on a laptop"
     >
       <defs>
         <linearGradient id="coder-hoodie" x1="0" y1="0" x2="0" y2="1">
@@ -50,8 +53,14 @@ export function CoderCharacter({ className }: { className?: string }) {
           <stop offset="0" stopColor="#434866" />
           <stop offset="1" stopColor="#262a40" />
         </linearGradient>
-        <clipPath id="coder-head-clip">
-          <ellipse cx="120" cy="110" rx="26" ry="28" />
+        <linearGradient id="coder-lens" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#1e1b4b" />
+          <stop offset="0.55" stopColor="#0b0b14" />
+          <stop offset="1" stopColor="#312e81" />
+        </linearGradient>
+        <clipPath id="coder-lens-clip">
+          <path d={LENS_LEFT} />
+          <path d={LENS_RIGHT} />
         </clipPath>
       </defs>
 
@@ -101,7 +110,7 @@ export function CoderCharacter({ className }: { className?: string }) {
       {/* Body (breathes) */}
       <g className="coder-body">
         <path
-          d="M50 240c0-40 6-66 26-80 12-8 26-11 44-11s32 3 44 11c20 14 26 40 26 80z"
+          d="M44 240c0-40 6-66 28-80 12-8 28-11 48-11s36 3 48 11c22 14 28 40 28 80z"
           fill="url(#coder-hoodie)"
         />
         {/* Seams / shading */}
@@ -136,7 +145,7 @@ export function CoderCharacter({ className }: { className?: string }) {
         </text>
 
         {/* Neck */}
-        <path d="M110 132h20v18h-20z" fill={SKIN_SHADE} />
+        <path d="M107 132h26v18h-26z" fill={SKIN_SHADE} />
 
         {/* Hood bunched at the neck */}
         <path
@@ -146,39 +155,74 @@ export function CoderCharacter({ className }: { className?: string }) {
         <path d="M94 158c6 5 15 7 26 7s20-2 26-7" fill="none" stroke="rgb(0 0 0 / 0.22)" strokeWidth="1.5" />
       </g>
 
-      {/* Head (turns to look back) */}
+      {/* Head — back of the head while typing; turns to face the viewer every ~9s */}
       <g className="coder-head">
-        <ellipse className="coder-ear-left" cx="94.5" cy="113" rx="4.5" ry="6.5" fill={SKIN_SHADE} />
-        <ellipse cx="145.5" cy="113" rx="4.5" ry="6.5" fill={SKIN_SHADE} />
+        <ellipse cx="94.5" cy="112" rx="4.5" ry="6.5" fill={SKIN_SHADE} />
+        <ellipse cx="145.5" cy="112" rx="4.5" ry="6.5" fill={SKIN_SHADE} />
 
-        {/* Skin, revealed as the hair slides away */}
-        <ellipse cx="120" cy="110" rx="25" ry="27" fill={SKIN} />
-
-        {/* Face profile, fades in during the look-back */}
-        <g className="coder-face">
-          <path d="M95.6 113.5c-2.6 1.6-3 4.2-.4 5.6" fill={SKIN} stroke={SKIN_SHADE} strokeWidth="0.8" />
-          <ellipse cx="101" cy="121" rx="4.5" ry="2.8" fill="#f28b82" opacity="0.5" />
-          <path d="M97 105c3-2 6.5-2 9 0" fill="none" stroke={HAIR} strokeWidth="2" strokeLinecap="round" />
-          <ellipse cx="101.5" cy="111.5" rx="2.6" ry="3.2" fill="#1b1530" />
-          <circle cx="102.5" cy="110.4" r="1" fill="#fff" />
-          <path d="M98 125.5c2.2 1.8 5 1.8 7.2 0" fill="none" stroke="#9a4a3c" strokeWidth="1.5" strokeLinecap="round" />
+        {/* Back view */}
+        <g className="coder-back">
+          <ellipse cx="120" cy="110" rx="25" ry="27" fill={SKIN} />
+          {/* Faded undercut behind the ears */}
+          <path d="M96 108c0 6 2 11 6 14l4-4c-3-2-5-6-6-10zM144 108c0 6-2 11-6 14l-4-4c3-2 5-6 6-10z" fill={HAIR} opacity="0.35" />
+          {/* Spiky crop */}
+          <path
+            d="M95 112c-1-9 0-16 3-22l-8-10 12 4-2-16 10 12 4-18 8 16 8-14 4 17 10-10-3 16 11-2-8 10c3 6 2 12 1 17-3 6-9 9-17 9l-8 5-8-5c-8 0-14-3-17-9z"
+            fill={HAIR}
+          />
+          <path
+            d="M103 96l-2-10M112 94l1-14M122 93l6-12M131 95l6-9M140 99l5-5"
+            fill="none"
+            stroke={HAIR_LIGHT}
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          {/* Rim light from the screen */}
+          <path
+            d="M90 80l12 4-2-16 10 12 4-18 8 16 8-14 4 17 10-10-3 16 11-2"
+            fill="none"
+            stroke="#7dd3fc"
+            strokeWidth="1"
+            strokeLinejoin="round"
+            opacity="0.4"
+          />
         </g>
 
-        {/* Hair slides right as he turns, uncovering the face (clipped to the head) */}
-        <g clipPath="url(#coder-head-clip)">
-          <g className="coder-hair">
-            <ellipse cx="120" cy="107" rx="28" ry="29" fill={HAIR} />
-            <path d="M101 96c8-6 22-8 34-2M100 110c10-5 26-5 38 0M104 124c8-3 20-3 30 1" fill="none" stroke={HAIR_LIGHT} strokeWidth="2" strokeLinecap="round" />
+        {/* Front view */}
+        <g className="coder-front">
+          <path
+            d="M95 98v18q2 14 13 20 6 4 12 4t12-4q11-6 13-20V98c0-14-11-20-25-20s-25 6-25 20z"
+            fill={SKIN}
+          />
+          {/* Stubble */}
+          <path
+            d="M98 118q2 13 12 18 5 3 10 3t10-3q10-5 12-18-10 8-22 8t-22-8z"
+            fill="#6b4a3a"
+            opacity="0.22"
+          />
+          {/* Nose */}
+          <path d="M120.5 113q-2 5-3.5 8 2 1.4 4.5.4" fill="none" stroke={SKIN_SHADE} strokeWidth="1.4" strokeLinecap="round" />
+          {/* Smirk */}
+          <path d="M111 129q8 2.5 16-2.2l2-1.8" fill="none" stroke="#7a3b2e" strokeWidth="1.8" strokeLinecap="round" />
+          {/* Brows */}
+          <path d="M100 98.5l16 2.6M124 101.1l16-2.6" stroke={HAIR} strokeWidth="3.2" strokeLinecap="round" />
+
+          {/* Shades */}
+          <path d="M96 104.5h48" stroke="#0b0b14" strokeWidth="3" strokeLinecap="round" />
+          <path d={LENS_LEFT} fill="url(#coder-lens)" stroke="#0b0b14" strokeWidth="1.4" />
+          <path d={LENS_RIGHT} fill="url(#coder-lens)" stroke="#0b0b14" strokeWidth="1.4" />
+          <path d="M117 106.5q3-2.2 6 0" fill="none" stroke="#0b0b14" strokeWidth="1.8" />
+          <g clipPath="url(#coder-lens-clip)">
+            <path className="coder-glint" d="M96 118l6-16h4l-6 16z" fill="#fff" opacity="0.75" />
           </g>
-        </g>
 
-        {/* Messy top tufts */}
-        <path
-          d="M97 99c-2-12 6-20 12-22l1 6 6-9 3 7 7-7 1 8 8-5-2 8c5 2 9 7 9 14-8-6-20-8-45 0z"
-          fill={HAIR}
-        />
-        {/* Rim light from the screen */}
-        <path d="M100 88c6-8 14-12 20-12s15 4 20 12" fill="none" stroke="#7dd3fc" strokeWidth="1.4" strokeLinecap="round" opacity="0.55" />
+          {/* Spiky hair from the front, with a swept spike over the forehead */}
+          <path
+            d="M93 106c-1-12 3-20 9-24l-6-12 12 6 2-16 10 13 8-14 4 15 11-8-3 13 10 1-8 8c4 5 6 12 5 18l-4-8c-4-4-10-5-16-4l-2 6-4-6c-6 0-12 2-17 5l6-9c-8 2-13 8-15 16z"
+            fill={HAIR}
+          />
+          <path d="M104 80l6 1M117 72l3 6M129 73l1 6M139 80l-4 3" fill="none" stroke={HAIR_LIGHT} strokeWidth="1.8" strokeLinecap="round" />
+        </g>
       </g>
     </svg>
   );
