@@ -2,6 +2,7 @@ import { ArrowUp, ArrowUpRight, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
 import type { ComponentType, SVGProps } from "react";
 
+import { DinoRunner } from "@/components/footer/dino-runner";
 import { CoderAvatar } from "@/components/shared/coder-avatar";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/social-icons";
 import { siteConfig, socialLinks } from "@/data/site";
@@ -32,7 +33,9 @@ export function SiteFooter() {
           {/* Brand */}
           <div className="max-w-md space-y-4">
             <div className="flex items-center gap-3">
-              <CoderAvatar className="size-12 shrink-0 rounded-full ring-2 ring-primary/40 ring-offset-2 ring-offset-background shadow-[0_10px_30px_-10px_var(--primary)]" />
+              <span className="avatar-ring shrink-0">
+                <CoderAvatar className="block size-12 rounded-full ring-2 ring-background" />
+              </span>
               <div>
                 <p className="font-semibold tracking-tight">{siteConfig.name}</p>
                 <p className="text-xs text-muted-foreground">{siteConfig.title}</p>
@@ -115,7 +118,11 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col-reverse items-start justify-between gap-4 border-t border-border pt-6 sm:flex-row sm:items-center">
+        <div className="-mb-4 -mt-6">
+          <DinoRunner />
+        </div>
+
+        <div className="flex flex-col-reverse items-start justify-between gap-4 sm:flex-row sm:items-center">
           <p className="text-xs text-muted-foreground">
             © {year} {siteConfig.name}. All rights reserved.
           </p>

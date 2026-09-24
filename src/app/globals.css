@@ -777,6 +777,119 @@
   animation: orbit-spin 60s linear infinite reverse;
 }
 
+/* ---------- Footer: spinning light ring around the avatar ---------- */
+
+.avatar-ring {
+  position: relative;
+  isolation: isolate;
+  border-radius: 9999px;
+  padding: 3px;
+  background: color-mix(in oklab, var(--primary) 18%, transparent);
+}
+
+.avatar-ring::before,
+.avatar-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 50%,
+    var(--primary) 72%,
+    #38bdf8 88%,
+    #ffffff 96%,
+    transparent 100%
+  );
+  animation: orbit-spin 2.4s linear infinite;
+}
+
+/* Soft glow that follows the light */
+.avatar-ring::after {
+  inset: -3px;
+  filter: blur(6px);
+  opacity: 0.75;
+}
+
+/* ---------- Footer: Chrome-style dino runner ---------- */
+
+.dino-cactus {
+  left: 100%;
+  animation: dino-cactus 3s linear infinite;
+}
+
+.dino-cactus-2 {
+  animation-delay: -1.5s;
+}
+
+/* Cacti reach the dino (left: 12%) at ~34% and ~84% of the cycle */
+.dino {
+  animation: dino-jump 3s infinite;
+}
+
+.dino-legs-a {
+  animation: dino-legs 0.24s steps(1) infinite;
+}
+
+.dino-legs-b {
+  animation: dino-legs 0.24s steps(1) -0.12s infinite;
+}
+
+.dino-ground {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--muted-foreground) 0 2px,
+    transparent 2px 19px,
+    var(--muted-foreground) 19px 20px,
+    transparent 20px 41px,
+    var(--muted-foreground) 41px 44px,
+    transparent 44px 71px
+  );
+  animation: dino-ground 0.8s linear infinite;
+}
+
+@keyframes dino-cactus {
+  from {
+    left: 100%;
+  }
+  to {
+    left: -5%;
+  }
+}
+
+@keyframes dino-jump {
+  0%,
+  25%,
+  43%,
+  75%,
+  93%,
+  100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1);
+  }
+  34%,
+  84% {
+    transform: translateY(-36px);
+    animation-timing-function: cubic-bezier(0.6, 0, 0.8, 0.3);
+  }
+}
+
+@keyframes dino-legs {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes dino-ground {
+  to {
+    background-position-x: -71px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -791,7 +904,9 @@
   }
 
   .jet,
-  .ufo {
+  .ufo,
+  .dino-cactus,
+  .dino-legs-b {
     display: none;
   }
 }
