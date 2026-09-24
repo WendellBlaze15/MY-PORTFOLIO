@@ -36,6 +36,8 @@ export type Project = {
   features: string[];
   /** Screenshot shown as the project cover (falls back to a generated preview). */
   image?: string;
+  /** Second screenshot that fades in when the card is hovered. */
+  hoverImage?: string;
   links: {
     live?: ProjectLink;
   };

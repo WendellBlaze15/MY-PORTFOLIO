@@ -44,8 +44,21 @@ export function ProjectPreview({ project, className, large }: ProjectPreviewProp
               unoptimized
               loading="eager"
               sizes="(min-width: 1024px) 34rem, 92vw"
-              className="object-cover object-top"
+              className={cn(
+                "object-cover object-top",
+                project.hoverImage && "transition-opacity duration-500 group-hover:opacity-0"
+              )}
             />
+            {project.hoverImage ? (
+              <Image
+                src={project.hoverImage}
+                alt={`${project.title} second screenshot`}
+                fill
+                unoptimized
+                sizes="(min-width: 1024px) 34rem, 92vw"
+                className="object-cover object-top opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              />
+            ) : null}
           </div>
         </div>
       </div>
