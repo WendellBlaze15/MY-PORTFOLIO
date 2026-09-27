@@ -8,6 +8,7 @@ export const skillCategories: SkillCategory[] = [
       "HTML",
       "CSS",
       "JavaScript",
+      "TypeScript",
       "React",
       "Next.js",
       "Tailwind CSS",
@@ -32,7 +33,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     title: "Tools & Others",
-    skills: ["Git", "GitHub", "VS Code", "Figma", "Render", "Vercel", "Railway"],
+    skills: ["Git", "GitHub", "VS Code", "Figma", "Render", "Vercel", "Railway", "Claude"],
   },
 ];
 

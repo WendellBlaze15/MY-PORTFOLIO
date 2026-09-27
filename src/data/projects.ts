@@ -24,6 +24,23 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    id: "veraskin",
+    title: "VeraSkin – AI-Powered Dermatology Booking System",
+    description:
+      "An appointment and service management platform for a dermatology clinic, with AI-assisted skin photo analysis and personalized treatment recommendations. I led the technical planning and system design: architecture, database schema, security model, and UI/UX spec.",
+    category: "AI Web App",
+    technologies: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Gemini API"],
+    features: [
+      "AI skin photo analysis with a manual concern-selection fallback",
+      "Hybrid recommendation engine (tag matching + TF-IDF cosine similarity)",
+      "Real-time appointment tracking via Supabase Realtime",
+      "Role-based access for clients, staff, and dermatologists using Row-Level Security",
+    ],
+    links: {
+      live: { label: "View Live Site", href: "https://glow-track-ivory.vercel.app/" },
+    },
+  },
+  {
     id: "ecommerce",
     title: "Sports & Outdoors E-commerce System",
     description:
