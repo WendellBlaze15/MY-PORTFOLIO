@@ -36,6 +36,7 @@ export const projects: Project[] = [
       "Real-time appointment tracking via Supabase Realtime",
       "Role-based access for clients, staff, and dermatologists using Row-Level Security",
     ],
+    image: "/projects/veraskin.webp",
     links: {
       live: { label: "View Live Site", href: "https://glow-track-ivory.vercel.app/" },
     },
