@@ -24,6 +24,31 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    id: "baha-ready-3d",
+    title: "Baha Ready 3D – Flood Preparedness Game",
+    description:
+      "A bilingual 3D web and mobile game that teaches flood preparedness through typhoon simulations based on a Laguna lakeshore town. Players pack a go-bag, secure their home, and evacuate through rising floodwater from Signal No. 1 to 5, then get explained feedback on every decision. I designed the full system spec (architecture, database, security, and game design) and built it with AI-assisted development.",
+    category: "3D Educational Game",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Three.js (React Three Fiber)",
+      "Supabase",
+      "Colyseus",
+      "Tailwind CSS",
+    ],
+    features: [
+      "3D typhoon levels with server-verified scoring and Filipino/English feedback",
+      "Five user roles with RBAC, email OTP, MFA, and rate limiting",
+      "Realtime sync, offline-ready PWA, and an Android app",
+      "Co-op Survival Mode for up to 5 players (in development)",
+    ],
+    image: "/projects/baha-ready-3d.webp",
+    links: {
+      live: { label: "View Live Site", href: "https://baha-ready-3d.vercel.app/" },
+    },
+  },
+  {
     id: "veraskin",
     title: "VeraSkin – AI-Powered Dermatology Booking System",
     description:
